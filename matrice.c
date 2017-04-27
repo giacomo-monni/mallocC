@@ -2,15 +2,22 @@
 #include <stdlib.h>
 #include <malloc.h>
 
+// int *AllocaVettore(int n)
+// {}
+
 int **AllocaMatrice (int r, int c)
 {
 	int i, j;
   int **matrice;
   int valore;
 
-	matrice=(int**) malloc (r*sizeof (int*));
+	//<nomeVarMatrice>=(int**)malloc(righe*sizeof(int*));
+	//for (i=0;i<righe; i++)
+	// 	<nomeVarMatrice>[i]=(int*)malloc(colonne*sizeof(int));
+
+	matrice=(int**)malloc(r*sizeof(int*));
 	for (i=0;i<r; i++)
-		matrice [i]=(int*)malloc (c*sizeof(int));
+		matrice[i]=(int*)malloc(c*sizeof(int));
 
   if (matrice == NULL)
 	{
@@ -23,21 +30,20 @@ int **AllocaMatrice (int r, int c)
   for (i=0; i<r; i++)
     for (j=0;j<c; j++)
 		{
-    	matrice [i][j]=valore;
+    	matrice[i][j]=valore;
     	valore++;
 		}
 
   return matrice;
 }
 
-void **LiberaMemoria (int **matrice, int r, int c)
+void **LiberaMemoria (int **matrice, int r)
 {
-  int i,j;
+  int i;
 
   for (i=0;i<r;i++)
 		free (matrice[i]);
 	free (matrice);
-
 }
 
 
@@ -63,7 +69,6 @@ int main ()
     printf("\n");
   }
 
-  LiberaMemoria (matrice,r,c);
-
-	return 0;
+  LiberaMemoria (matrice,r);
+  return 0;
 }
